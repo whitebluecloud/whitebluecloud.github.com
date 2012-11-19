@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>installing harooPress |  hun</title>
+    <title>Start Node.JS |  hun</title>
     <meta name="description" content="hun">
     <meta name="author" content="hun">
     <meta name="keywords" content="nodejs" />
@@ -104,7 +104,7 @@
                     <h3>About this Article</h3>
                     <p>
                         <h5>Date Released:</h5>
-                        <span>Monday, November 12 2012 7:23 AM</span>
+                        <span>Monday, November 19 2012 2:31 AM</span>
                     </p>
                 </div>
             </div>
@@ -152,7 +152,7 @@
                     <div class="well bg">
                         
                         <div class="page-header">
-                            <h1>installing harooPress</h1>
+                            <h1>Start Node.JS</h1>
                         </div>
 
                         
@@ -161,17 +161,48 @@
                                             
 
                         <div class="markdown-wrapper">
-                            <h3 id="toc_18">환영합니다.</h3>
-<p>모두 환영해요.</p>
+                            <h2 id="toc_13">Start NodeJS</h2>
+<p><em class="label "><strong>[NodeJS Beginner Book]</strong></em></p><p><a href="http://www.nodebeginner.org/index-kr.html#javascript-and-nodejs">http://www.nodebeginner.org/index-kr.html#javascript-and-nodejs</a> 를 따라가며 포스팅해보려한다.</p>
+<h1 id="toc_14">서버를 열어보자</h1>
+<p>server.js란 파일을 생성하여 아래 내용을 넣는다.</p><pre><code class="javascript">var http = <span class="keyword">require</span>(<span class="string">'http'</span>);
+
+http.createServer(function(req, res) {
+    res.writeHead(<span class="number">200</span>, {<span class="string">"Content-Type"</span>: <span class="string">"text/plain"</span>});
+    res.<span class="keyword">write</span>(<span class="string">"Hello World"</span>);
+    res.end();
+}).<span class="keyword">listen</span>(<span class="number">3000</span>);
+</code></pre><p>저장한 후 
+<em class="label "><strong>node server.js</strong></em> 를 console창에서 입력한 후 브라우져를 통해 확인해보면
+hello world가 찍히는 것을 볼 수 있다.</p><p>nodejs를 설치하면 내장되어 있는 <em class="label "><strong>http</strong></em> 모듈을 <em class="label "><strong>require</strong></em> 를 통해 가져오고
+<em class="label "><strong>res.writeHead</strong></em> 를 통해 브라우져에 출력할 header설정을 하고,
+<em class="label "><strong>res.write</strong></em> 으로 body를 채운다음
+<em class="label "><strong>res.end</strong></em> 를 통해 return할 수 있다.
+<em class="label "><strong>listen</strong></em> 은 파라미터로 포트번호를 넣어 해당 포트를 열 수 있다.</p>
+<h1 id="toc_15">Event-driven callbacks</h1>
+<p>NodeJS는 비동기방식으로 프로세스가 진행이 된다.
+아는 한도에서 말하면 이벤트단위로 콜백함수를 두어 비동기방식으로 프로세스를 진행하는 방식이다.
+실행흐름이 일정하게 있는 것이 아닌 사용자의 동작에 따라 실행흐름이 바뀌게 되는 것이다.</p><p>위에서 사용한 코드를 콜백함수가 실행되는 것을 확인하도록 리팩토링하면</p><p>&#39;&#39;&#39;javascript
+var http = require(&quot;http&quot;);</p><p>function onRequest(request, response) {
+  console.log(&quot;Request received.&quot;);
+  response.writeHead(200, {&quot;Content-Type&quot;: &quot;text/plain&quot;});
+  response.write(&quot;Hello World&quot;);
+  response.end();
+}</p><p>http.createServer(onRequest).listen(8888);</p><p>console.log(&quot;Server has started.&quot;);
+&#39;&#39;&#39;
+위와 같이 바꿔볼 수 있다.</p>
                         </div>
                         <hr />
                                             
                         <div class="row-fluid">
                             
+                            <div class="pull-right">
+                                <a href="/post/installing-haroopress" class="btn btn-info">installing harooPress <i class="icon-white icon-chevron-right"></i></a>
+                            </div>
+                            
 
                             
                             <div class="pull-left">
-                                <a href="/post/start-node-dot-j-s" class="btn btn-info"><i class="icon-white icon-chevron-left"></i> Start Node.JS</a>
+                                <a href="/post/Amazon-Web-Service" class="btn btn-info"><i class="icon-white icon-chevron-left"></i> Amazon Web Service</a>
                             </div>
                             
                         </div>
@@ -205,9 +236,7 @@
         <!--<div class="offset3 span9">-->
             <!--<strong>tags</strong> :-->
             <!---->
-            <!--<a href="/tag/harooPress">harooPress</a>&nbsp;-->
-            <!---->
-            <!--<a href="/tag/install">install</a>&nbsp;-->
+            <!--<a href="/tag/NodeJS">NodeJS</a>&nbsp;-->
             <!---->
         <!--</div>-->
     <!--</div>-->

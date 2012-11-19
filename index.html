@@ -93,6 +93,8 @@
                     
                     <li><a href="/category/aws"><i class="icon-book"></i> aws</a></li>
                     
+                    <li><a href="/category/nodejs"><i class="icon-book"></i> nodejs</a></li>
+                    
                     <li><a href="/category/haroopress"><i class="icon-book"></i> haroopress</a></li>
                     
                 </ul>
@@ -170,6 +172,45 @@
             <div class="well">
                 
                 <div class="page-header">
+                    <h1><a href="/post/start-node-dot-j-s">Start Node.JS</a></h1>
+                    <span class="pull-right">Monday, November 19 2012 2:31 AM</span>
+                </div>
+                <div class="pull-right">
+                    <ul class="thumbnails">
+                        <li class="thumbnail">
+                            <img src="http://www.gravatar.com/avatar/969a14eb11d6ca9e6a742dc036529bd9?r=pg&amp;s=128.jpg&amp;d=identicon"/>
+                        </li>
+                    </ul>
+                </div>
+                <div class="markdown-wrapper">
+                    <h2 id="toc_16">Start NodeJS</h2>
+<p><em class="label "><strong>[NodeJS Beginner Book]</strong></em></p><p><a href="http://www.nodebeginner.org/index-kr.html#javascript-and-nodejs">http://www.nodebeginner.org/index-kr.html#javascript-and-nodejs</a> 를 따라가며 포스팅해보려한다.</p>
+<h1 id="toc_17">서버를 열어보자</h1>
+<p>server.js란 파일을 생성하여 아래 내용을 넣는다.</p><pre><code class="javascript">var http = <span class="keyword">require</span>(<span class="string">'http'</span>);
+
+http.createServer(function(req, res) {
+    res.writeHead(<span class="number">200</span>, {<span class="string">"Content-Type"</span>: <span class="string">"text/plain"</span>});
+    res.<span class="keyword">write</span>(<span class="string">"Hello World"</span>);
+    res.end();
+}).<span class="keyword">listen</span>(<span class="number">3000</span>);
+</code></pre><p>저장한 후 
+<em class="label "><strong>node server.js</strong></em> 를 console창에서 입력한 후 브라우져를 통해 확인해보면
+hello world가 찍히는 것을 볼 수 있다.</p><p>nodejs를 설치하면 내장되어 있는 <em class="label "><strong>http</strong></em> 모듈을 <em class="label "><strong>require</strong></em> 를 통해 가져오고
+<em class="label "><strong>res.writeHead</strong></em> 를 통해 브라우져에 출력할 header설정을 하고,
+<em class="label "><strong>res.write</strong></em> 으로 body를 채운다음
+<em class="label "><strong>res.end</strong></em> 를 통해 return할 수 있다.
+<em class="label "><strong>listen</strong></em> 은 파라미터로 포트번호를 넣어 해당 포트를 열 수 있다.</p>
+                </div>
+                <hr/>
+                <a class="pull-right" href="/post/start-node-dot-j-s#disqus_thread" data-disqus-identifier="0"></a>
+                <p>
+                    <a href="/post/start-node-dot-j-s" class="btn btn-info">Read more...</a>
+                </p>
+            </div>
+            
+            <div class="well">
+                
+                <div class="page-header">
                     <h1><a href="/post/Amazon-Web-Service">Amazon Web Service</a></h1>
                     <span class="pull-right">Tuesday, November 13 2012 9:29 PM</span>
                 </div>
@@ -209,7 +250,7 @@ Call Me Now 버튼을 클릭하면!!! 국제전화가 옵니다.;;;
 <p>이제 가입을 했으니 instance를 생성해보자.</p><p>로그인을 하면</p>
                 </div>
                 <hr/>
-                <a class="pull-right" href="/post/Amazon-Web-Service#disqus_thread" data-disqus-identifier="0"></a>
+                <a class="pull-right" href="/post/Amazon-Web-Service#disqus_thread" data-disqus-identifier="1"></a>
                 <p>
                     <a href="/post/Amazon-Web-Service" class="btn btn-info">Read more...</a>
                 </p>
@@ -229,11 +270,11 @@ Call Me Now 버튼을 클릭하면!!! 국제전화가 옵니다.;;;
                     </ul>
                 </div>
                 <div class="markdown-wrapper">
-                    <h3 id="toc_14">환영합니다.</h3>
+                    <h3 id="toc_19">환영합니다.</h3>
 <p>모두 환영해요.</p>
                 </div>
                 <hr/>
-                <a class="pull-right" href="/post/installing-haroopress#disqus_thread" data-disqus-identifier="1"></a>
+                <a class="pull-right" href="/post/installing-haroopress#disqus_thread" data-disqus-identifier="2"></a>
                 <p>
                     <a href="/post/installing-haroopress" class="btn btn-info">Read more...</a>
                 </p>
