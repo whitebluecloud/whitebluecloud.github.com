@@ -1,43 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[hun]]></title><description><![CDATA[hun]]></description><link>http://whitebluecloud.github.com</link><generator>NodeJS RSS Module</generator><lastBuildDate>Mon, 12 Nov 2012 12:39:05 GMT</lastBuildDate><atom:link href="http://whitebluecloud.github.com/rss.xml" rel="self" type="application/rss+xml"/><item><title><![CDATA[Welcome to haroopress]]></title><description><![CDATA[<img src="http://www.gravatar.com/avatar/a8618a255192bd842fdd62d099776735?r=pg&s=48.jpg&d=identicon"><br/><h3 id="toc_7">환영합니다.</h3>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[hun]]></title><description><![CDATA[hun]]></description><link>http://whitebluecloud.github.com</link><generator>NodeJS RSS Module</generator><lastBuildDate>Mon, 19 Nov 2012 05:35:05 GMT</lastBuildDate><atom:link href="http://whitebluecloud.github.com/rss.xml" rel="self" type="application/rss+xml"/><item><title><![CDATA[Amazon Web Service]]></title><description><![CDATA[<img src="http://www.gravatar.com/avatar/969a14eb11d6ca9e6a742dc036529bd9?r=pg&s=48.jpg&d=identicon"><br/><h3 id="toc_9">아마존 웹서비스 설치 및 실행과정</h3>
 
-<ul>
-<li>Welcome</li>
-<li>歡迎</li>
-<li>bienvenida</li>
-<li>accueil</li>
-<li>willkommen</li>
-<li>ようこそ</li>
-<li>välkommet</li>
-<li>grata</li>
-<li>добро пожаловать</li>
-</ul>
+<h2 id="toc_10">Amazon Web Service(AWS), 아마존웹서비스?</h2>
+<p>책 파는 걸로 유명한 amazon사에서 운영하는 클라우드서비스인데 상세한 내용은 검색을 하면 나보다 잘 아는 분들이
+써놓은 글들이 많을테니 그 부분은 넘어가도록 하고
+aws를 사용하게 된 이유는 물리적 or 금전적 or 귀찮음 or 능력 부족으로 서버를 보유하지 못한 사람들이 
+처음 1년 동안은 서버를 무료로 사용할 수 있게 해준다고 해서 사용하게 되었다.</p><p>가입절차는 로그를 남기려는 목적이 커서 가입절차에 따른 사진따위는 생략... </p><p>아마존웹서비스 홈페이지 [<a href="http://aws.amazon.com/ko/free/">http://aws.amazon.com/ko/free/</a>]</p>
+<h2 id="toc_11">가입</h2>
 
-<h3 id="toc_8">Intro</h3>
-<p>하루프레스는 하루의 이야기를 블로깅하기 위한 정적 페이지 블로그 엔진입니다.</p>
-<h3 id="toc_9">Haroopress?</h3>
+<ol>
+<li>위의 사이트에 들어가 sign up 버튼 클릭</li>
+<li>CREATE ACCOUNT 이름 및 결제 정보 입력하고 계속 continue를 누르다보면</li>
+<li>PAYMENT METHOD가 나오는데 이 부분에서 아이폰 앱스토어 이용시 실제 유효한 카드인지에 대해 체크하는
+부분이 나온다. 자신이 소유한 비자 또는 마스터카드의 정보를 입력하면 $1이 결제되고 다시 결제취소가 되어 $1가 
+돌아오게 된다.</li>
+<li>IDENTITY VERIFICATION 에는 휴대폰 번호를 입력한다.
+Country Code는 korea
+Phone Number에는 010-xxxx-xxxx에서 0을 뺀 10xxxxxxxx
+ext는 아무것도 입력하지 않고
+Call Me Now 버튼을 클릭하면!!! 국제전화가 옵니다.;;;
+하지만 침착하게 앞에 나오는 PIN번호 4자리를 입력합니다.</li>
+<li>가입한 이메일로 인증메일이 도착합니다. 그 메일을 열어서 인증을 완료하면 가입이 완료된다.</li>
+</ol>
 
-<ul>
-<li><a href="http://haroopress.com/about/">하루프레스?</a></li>
-<li><a href="http://haroopress.com/slides/">하루프레스 웹 프리젠테이션</a></li>
-<li><a href="http://haroopress.com/book/">하루프레스 eBook</a></li>
-<li><a href="http://haroopress.com/diary">하루프레스 개발 다이어리</a></li>
-</ul>
-
-<h3 id="toc_10">Usage</h3>
-
-<ul>
-<li><a href="http://haroopress.com/post/haroopress-install-guide-movie/">5분만에 설치하는 하루프레스 동영상</a></li>
-<li><a href="http://haroopress.com/post/haroopress-quick-guide/">하루프레스 퀵 가이드</a></li>
-<li><a href="http://haroopress.com/post/haroopress-posting-guide/">하루프레스 포스팅 가이드</a></li>
-<li><a href="http://haroopress.com/post/haroopress-default-data-format/">하루프레스 기본 데이터 규약</a></li>
-<li><a href="http://haroopress.com/post/haroopress-update-my-profile/">하루프레스 저작자 프로파일 수정하기</a></li>
-<li><a href="http://haroopress.com/post/harupeureseu-hwangyeongseoljeong-hagi/">하루프레스 환경설정 하기</a></li>
-</ul>
-
-<h3 id="toc_11">History</h3>
-
-<ul>
-<li><a href="https://github.com/rhiokim/haroopress/wiki/Change-History">변경 이력</a></li>
-</ul>
-]]></description><link>http://whitebluecloud.github.com/post/welcome-to-haroopress</link><guid isPermaLink="false">welcome-to-haroopress</guid><dc:creator><![CDATA[<a href="haroopress" target="_blank">haroopress</a>]]></dc:creator><pubDate>Tue, 21 Feb 2012 00:00:00 GMT</pubDate></item></channel></rss>
+<h2 id="toc_12">Instance 생성</h2>
+<p>이제 가입을 했으니 instance를 생성해보자.</p><p>로그인을 하면</p>]]></description><link>http://whitebluecloud.github.com/post/Amazon-Web-Service</link><guid isPermaLink="false">Amazon-Web-Service</guid><dc:creator><![CDATA[<a href="" target="_blank">hun</a>]]></dc:creator><pubDate>Wed, 14 Nov 2012 02:29:00 GMT</pubDate></item><item><title><![CDATA[installing harooPress]]></title><description><![CDATA[<img src="http://www.gravatar.com/avatar/969a14eb11d6ca9e6a742dc036529bd9?r=pg&s=48.jpg&d=identicon"><br/><h3 id="toc_14">환영합니다.</h3>
+<p>모두 환영해요.</p>]]></description><link>http://whitebluecloud.github.com/post/installing-haroopress</link><guid isPermaLink="false">installing-haroopress</guid><dc:creator><![CDATA[<a href="" target="_blank">hun</a>]]></dc:creator><pubDate>Mon, 12 Nov 2012 12:23:00 GMT</pubDate></item></channel></rss>
