@@ -180,10 +180,10 @@ Call Me Now 버튼을 클릭하면!!! 국제전화가 옵니다.;;;
 
 <h2 id="toc_3">Instance 생성</h2>
 <p>이제 가입을 했으니 instance를 생성해보자.</p><p>로그인을 하면</p><p><img src="./@img/a_1.png" alt="AWS Console 화면">
-이와 같은 화면이 나오게 된다.</p><p>왼쪽에 다양한 메뉴들이 있지만 일단 패스하고 가운데에 있는 <em class="label label-important"><strong>Launch Instance</strong></em>를 클릭하면</p><p>아래의 뷰가 뜨게 된다.</p><p><img src="./@img/a_2.png" alt="instance 생성 화면">
+이와 같은 화면이 나오게 된다.</p><p>왼쪽에 다양한 메뉴들이 있지만 일단 패스하고 가운데에 있는 <em class="label label-important"><strong>Launch Instance</strong></em> 를 클릭하면</p><p>아래의 뷰가 뜨게 된다.</p><p><img src="./@img/a_2.png" alt="instance 생성 화면">
 위 classic wizard는 여러 서버목록이 다양하게 있으며 자신이 직접 서버환경설정을 해놓아 저장을 할 수도 있다.
 입맞에 맞는 서버셋팅을 고를 수도 있으나, 난 입맛에 맞게 선택할 형편이 안되므로
-quick Launch Wizard -&gt; Amazon Linux AMI 2012.03을 선택(여러가지로 해본 결과 나에게는 이게 제일 나았음)</p><p>continue를 누르기 전에! 중요한 aws를 사용하는데 중요한 부분인 Choose a key pair라는 항목을 보면</p><p>기존에 처음 만든 사람들은 None으로 체크되어 있을 것이다.</p><p>Create New를 누르고 aws서버에 접근할 때 필요한 키를 생성한다.(중요)</p><p>적당한 이름으로 생성을 하고 download를 눌러 컴퓨터에 잘 저장해놓는다.(확장자 pem)</p><p>그리고 continue 를 누르면 생성이 된다. </p><p>이제 instance(서버)를 생성했다.</p>
+<em class="label label-important"><strong>quick Launch Wizard -&gt; Amazon Linux AMI 2012.03</strong></em> 을 선택(여러가지로 해본 결과 나에게는 이게 제일 나았음)</p><p>continue를 누르기 전에! 중요한 aws를 사용하는데 중요한 부분인 Choose a key pair라는 항목을 보면</p><p>기존에 처음 만든 사람들은 None으로 체크되어 있을 것이다.</p><p>Create New를 누르고 aws서버에 접근할 때 필요한 키를 생성한다.(중요)</p><p>적당한 이름으로 생성을 하고 download를 눌러 컴퓨터에 잘 저장해놓는다.(확장자 pem)</p><p>그리고 continue 를 누르면 생성이 된다. </p><p>이제 instance(서버)를 생성했다.</p>
 <h2 id="toc_4">Instance 설정</h2>
 <p>aws 메인에서 aws management console을 클릭하면 console화면이 나오게 된다.</p><p><img src="./@img/b_1.png" alt="instance 생성 화면"></p><p>계정 생성 후에는 이 페이지만 즐겨찾기 추가해놓고 사용하면 된다.</p><p>서버가 생성되면 initializing상태가 되는데 1~3분 정도 지나면 2/2 checks passed 라는 상태로 바뀌게 되고</p><p>서버가 정상적으로 작동하게 된다.</p><p>왼쪽에 탭중 주로 쓰게 되는 중요한 메뉴는 Instances, Security Groups, Elastic IPs, Key Pairs다.</p><p><img src="./@img/b_2.png" alt="instance 생성 화면">
 생각해보니 instance 생성시에 quicklaunch로 생성하게 되면 quick-launch-0으로 셋팅될 것이다.</p><p>해당 그룹을 선택후 아래에 뜨는 inbound 탭을 클릭하면</p><p>서버에서 inbound로 들어오는 port를 열 수 있다. default로 22(ssh)가 열려 있을 텐데</p><p>80(http), 3306(MYSQL), 443(HTTPS)를 열어둔다.(port range, source는 일단 무시하고 add rule 후에</p><p>apply rule changes를 클릭한다. </p><p><img src="./@img/b_3.png" alt="instance 생성 화면">
