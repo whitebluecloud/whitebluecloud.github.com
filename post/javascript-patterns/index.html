@@ -162,7 +162,7 @@
 
                         <div class="markdown-wrapper">
                             <p>자바스크립트 코딩기법과 핵심패턴에 대해 프린트하여 보기 좋게 정리하기 위해 포스팅</p>
-<h3 id="toc_0">개 요</h3>
+<h1 id="toc_0">기초</h1>
 
 <h2 id="toc_1">유지보수 가능한 코드 작성</h2>
 <p>유지보수가 가능한 코드란 다음과 같은 특징을 가짐
@@ -293,6 +293,149 @@ private나 protected는 _</em>myPrivateMethod, _myProtectedMethod 처럼 구분�
 <p>야후의 YUICompressor 나 구글의 Closure Compiler 활용. </p>
 <h2 id="toc_16">JSLint 실행</h2>
 <p>지금까지 다룬 패턴 위반사례를 잡아줌. </p>
+<h1 id="toc_17">리터럴과 생성자</h1>
+<p>이 장에서 중요한 것은 생성자 사용을 자제하고 리터럴 표기법을 사용하라는 것임!</p><p>리터럴 표기법이 생성자 함수 사용보다 더 간결하고 짧다.
+리터럴 표기법을 사용하면 유효범위 판별 작업이 발생하지 않는다.
+리터럴 표기법을 사용하는 것이 더 안정적이다. new Object()에 인자가 동적으로 전달되는 경우 예기치 않는 결과가 나올 수 있다. var o = new Object(1);에서 o.constructor === Number는 true가 된다.
+생성자는 함수내에 반환문이 없더라도 암묵적으로 this를 반환한다. 이 말은 this대신 다른 것도 반환할 수 있다는 것을 의미한다.
+생성자 패턴을 사용하면 논리적 오류가 발생할 수 있다. 자바스크립트에서 생성자는 함수일 뿐이므로 new를 빼먹으면 생성자 내부에 this는 전역 객체를 가리키게 되어 의도치 않는 결과를 초래할 수 있다. 이를 우회하기 위해 다음과 같은 패턴을 사용한다.</p><pre><code class="javascript"><span class="function"><span class="title">if</span><span class="params">(typeof <span class="variable">Array</span>.is<span class="variable">Array</span> === <span class="string">"undefined"</span>)</span> {
+    A<span class="title">rray</span>.<span class="title">isArray</span> = <span class="title">function</span><span class="params">(arg)</span> {
+    <span class="title">return</span> O<span class="title">bject</span>.<span class="title">prototype</span>.<span class="title">toString</span>.<span class="title">call</span>.<span class="params">(arg)</span> === "[<span class="title">object</span> A<span class="title">rray</span>]";
+    };
+}
+</code></pre><p>JSON은 자바스크립트 객체 표기법으로 데이터 전송 형식의 일종으로 배열과 객체 리터럴 표기법의 조합이다.
+JSON을 다루기 위해 eval()을 사용하는 것은 금지한다.
+JSON은 가능하면 JSON.parse()와 JSON.stringify()를 사용한다. 이것은 ES 5 부터 추가되었다. 구형 브라우져인 경우 YUI나 jQuery용을 사용하자.
+정규 표현식도 리터럴 타입이 안전하다. 생성자 타입(new RegExp())을 사용하는 것은 매칭시킬 패턴을 미리 알 수 없어 런타임에 문자열을 만들어야하는 경우이다.
+원시 데이터 타입 레퍼 생성자는 사용하지 말자. 즉 new String(&quot;my string&quot;); 이런거 말이다.
+원시 데이터에서 &quot;Hello there&quot;.split(&#39; &#39;)[0]; 이 동작할 수 있는 것은 일시적으로 객체로 변환하기 때문이다.
+에러 객체. 자바스크립트 에러 객체는 Error(), SyntaxError(), TypeError() 3개이다. 이것은 throw문과 사용된다. 중요한 프로퍼티는 name, message이다. 하지만 throw문은 이 에러 객체를 사용하지 않아도 잘 동작한다. throw {name:.., message:..., extra:...}; 형태처럼 사용해도 무방하다.
+다음은 권장되는 리터럴과 원시 데이터 타입이다.</p><pre><code class="javascript"><span class="keyword">var</span> o = {};
+<span class="keyword">var</span> a = [];
+<span class="keyword">var</span> re = <span class="regexp">/[a-z]/g</span>;
+<span class="keyword">var</span> s = <span class="string">""</span>;
+<span class="keyword">var</span> n = <span class="number">0</span>;
+<span class="keyword">var</span> b = <span class="literal">false</span>;
+<span class="keyword">throw</span> {
+    name : <span class="string">"Error"</span>,
+    message : <span class="string">"uh-oh"</span>
+};
+
+또는
+<span class="keyword">throw</span> Error(<span class="string">"uh-oh"</span>);
+</code></pre>
+<h1 id="toc_18">함수</h1>
+
+<h2 id="toc_19">자바스크립트에서 함수의 중요한 특징</h2>
+<p>함수는 일급객체 : 값이 전달될 수 있고 프로퍼티와 메서드를 확장할 수 있다.
+함수는 지역 유효범위 제공 : 함수외에 다른 중괄호({}) 묶음은 지역 유효범위를 제공하지 않는다. 로컬 변수의 선언은 로컬 유효범위의 맨 윗부분으로 호이스팅이 된다.</p>
+<h2 id="toc_20">함수를 생성하는 문법</h2>
+<p>기명 함수 표현식(named function expression)</p><pre><code class="javascript"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(a, b)</span> {</span>
+    <span class="keyword">return</span> a + b;
+};
+</code></pre><p>무명 함수 표현식(unnamed function expression) = 함수 표현식 , 익명함수(anonymous function)</p><pre><code class="javascript"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span> <span class="params">(a, b)</span> {</span>
+    <span class="keyword">return</span> a + b;
+};
+
+함수 선언문(<span class="function"><span class="keyword">function</span> <span class="title">declaration</span>) 함수 선언문에는 세미콜론이 필요하지 않다.
+~~~<span class="title">javascript</span>
+<span class="title">function</span> <span class="title">foo</span><span class="params">()</span> {</span>
+    <span class="comment">// 함수 본문</span>
+}
+
+##함수 호이스팅
+
+함수 선언문은 함수 내에서 호이스팅되지만 함수표현식에서 선언만 호이스팅된다. 즉, 정의는 호이스팅되지 않는다! 
+
+##함수패턴 : API 패턴
+
+함수에 더 좋고 깔끔한 인터페이스를 제공할 수 있도록 도와줌
+콜백 패턴 : 함수를 인자로 전달
+- 콜백을 사용할 때는 항상 유효범위를 고려해야한다.
+- 콜백은 라이브러리에 들어가는 코드와 같이 범용적이고 재사용할 수 있도록 일반화 시키는데 도움을 준다.
+- 이벤트와 같이 비동기적 동작을 위해 콜백은 유용하게 사용된다.
+설정 객체 : 함수에 많은 수의 매개변수를 전달할 때 통제를 벗어나지 않도록 해줌
+- 좀 더 깨끗한 API를 제공하는 방법으로 라이브러리나 다른 프로그램에서 사용할 코드를 만들 때 유용하다.
+- 장점 : 매개변수와 순서를 기억할 필요 없다. 선택적인 매개변수를 안전하게 생략가능. 읽기 쉽고 유지보수 편함. 매개변수를 추가하거나 제거하기 편함 
+- 단점 : 매개변수 이름을 기억해야함. 프로퍼티 이름들이 압축되지 않음.
+함수 반환 : 함수의 반환값이 또 다시 함수가 될 수 있다.
+- 클로저가 생성되기 때문에 비공개 데이터 저장을 위해 사용할 수 있다. 가령, 매번 호출할 때마다 값을 증가시키는 카운터 기능을 만들 수 있다.
+커링 : 원본 함수와 매개변수 일부를 물려받는 새로운 함수를 생성한다. 
+- 함수 적용 : 함수의 호출은 실제로 인자의 묶음을 함수에 적용하는 것이다. Function.prototype.apply(), Function.prototype.call() 을 기억하자. 
+- 부분 적용 : 자바스크립트의 동적인 특성을 사용해 add(<span class="number">5</span>,<span class="number">4</span>)를 add(<span class="number">5</span>)(<span class="number">4</span>) 처럼 동작하도록 한 것을 부분 적용이라고 한다.
+- 커링(Curring) : 부분 적용을 이해하고 처리할 수 있도록 만들어나가는 과정을 말한다. 
+
+~~~javascript
+<span class="comment">//커링된 add() 예</span>
+<span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(x, y)</span> {</span>
+    <span class="keyword">if</span> (<span class="keyword">typeof</span> y === <span class="string">"undefined"</span>) {
+        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="params">(y)</span> {</span>
+        <span class="keyword">return</span> x + y;
+        };
+    }
+    <span class="keyword">return</span> x + y;
+}
+<span class="keyword">typeof</span> add(<span class="number">5</span>); <span class="comment">//function</span>
+add(<span class="number">3</span>)(<span class="number">4</span>); <span class="comment">//7</span>
+<span class="keyword">var</span> add2000 = add(<span class="number">2000</span>);
+add2000(<span class="number">10</span>); <span class="comment">//2010</span>
+</code></pre><pre><code class="javascript"><span class="comment">//커링의 범용성 적용</span>
+<span class="function"><span class="keyword">function</span> <span class="title">schonfinkelize</span><span class="params">(fn)</span> {</span>
+    <span class="keyword">var</span> slice = <span class="keyword">Array</span>.prototype.slice,
+    stored_args = slice.call(arguments, <span class="number">1</span>);
+    <span class="keyword">return</span> function() {
+        <span class="keyword">var</span> new_args = slice.call(arguments),
+            args = stored_args.concat(new_args);
+        <span class="keyword">return</span> fn.apply(<span class="keyword">null</span>, args);  
+    };
+}
+<span class="comment">//일반함수</span>
+<span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(x, y)</span> {</span>
+    <span class="keyword">return</span> x + y;
+}
+<span class="keyword">var</span> newadd = schonfinkelize(add, <span class="number">5</span>);
+newadd(<span class="number">4</span>); <span class="comment">//9</span>
+
+schonfinkelize(add, <span class="number">6</span>)(<span class="number">7</span>); <span class="comment">//13</span>
+
+<span class="comment">//다른 일반함수</span>
+<span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(a, b, c, d, e)</span> {</span>
+    <span class="keyword">return</span> a + b + c + d + e;
+}
+schonfinkelize(add, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)(<span class="number">5</span>, <span class="number">5</span>); <span class="comment">//16</span>
+
+<span class="comment">//2단계 커링</span>
+<span class="keyword">var</span> addOne = schonfinkelize(add, <span class="number">1</span>);
+addOne(<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>); <span class="comment">//41</span>
+<span class="keyword">var</span> addSix = schonfinkelize(addOne, <span class="number">2</span>, <span class="number">3</span>);
+addSix(<span class="number">5</span>, <span class="number">5</span>); <span class="comment">//16</span>
+
+<span class="comment">##함수패턴 : 초기화 패턴</span>
+
+웹페이지와 애플리케이션에서 매우 흔히 사용되는 초기화와 설정작업을 전역 네임스페이스를 어지럽히지 않고 임시 변수를 사용해 좀더 깨끗하고 구조화된 방법으로 수행할 수 있도록 도와줌
+즉시 실행 함수 : 정의되자마자 실행된다.
+
+- 장점 : 초기화 코드에 유효범위 샌드박스(sandbox)를 제공한다. 즉, 전역 네임스페이스를 깨끗하게 유지한다.
+- 인자를 전달할 수 있다. 즉시 실행 함수내에서 window를 사용하지 않고도 전역객체에 접근할 때 유용하다.
+- 즉시 실행함수에서 미리 계산하여 클로저에 저장해둔 값을 반환할 수 있다.
+- 객체 프로퍼티를 정의할 때도 사용할 수 있다.
+즉시 객체 초기화 : 익명 객체 내부에서 초기화 작업을 구조화한 다음 즉시 호출할 수 있는 메서드를 제공한다.
+- 즉시 객체 초기화 패턴을 활용하면 즉시 실행 함수와 초기화 작업을 할 수 있다는 장점이 있다. 구조적으로 초기화를 구분할 경우 장점이 있다. 
+- 하지만 압축도구는 구글의 클러저 컴파일러의 고급 모드에서만 압축이 가능하다.
+초기화 시점의 분기 : 최초 코드 실행 시점에 코드를 분기하여, 애플리케이션 생명 주기 동안 계속해서 분기가 발생하지 않도록 막아준다. 
+- 어떤 조건이 프로그램의 생명주기 동안 변경이 되지 않는게 확실한 경우, 조건을 단 한 번만 확인하는 것이 바람직하다. 
+
+<span class="comment">##함수패턴 : 성능 패턴</span>
+
+코드의 실행속도를 높이는데 도움을 준다.
+메모이제이션 패턴 : 함수 프로퍼티를 사용해 계산된 값을 다시 계산되지 않도록 한다. 
+
+- 객체의 인자를 캐시하여 키값으로 삼아 같은 인자가 들어올 때 다시 계산하지 않도록 해서 성능을 높혀준다.
+자기선언 함수 : 자기 자신을 덮어씀으로써 두 번째 호출 이후부터는 작업량을 줄게 해줌 
+- 함수가 어떤 초기화 준비 작업을 단 한 번만 수행할 경우 유용하다.
+- 단점<span class="number">1</span>은 자기 자신을 재정의한 후에는 이전에 원본 함수에 추가했던 프로퍼티들을 모두 찾을 수 없게된다. 
+- 단점<span class="number">2</span>는 함수가 다른 이름으로 사용된다면, 재정의된 부분이 아니라 원본 함수의 본문이 실행되어 의도치 않은 동작을 만들 수 있다.
+</code></pre>
                         </div>
                         <hr />
                                             
