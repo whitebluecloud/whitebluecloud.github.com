@@ -342,31 +342,28 @@ JSON은 가능하면 JSON.parse()와 JSON.stringify()를 사용한다. 이것은
 <span class="title">function</span> <span class="title">foo</span><span class="params">()</span> {</span>
     <span class="comment">// 함수 본문</span>
 }
-
-##함수 호이스팅
-
-함수 선언문은 함수 내에서 호이스팅되지만 함수표현식에서 선언만 호이스팅된다. 즉, 정의는 호이스팅되지 않는다! 
-
-##함수패턴 : API 패턴
-
-함수에 더 좋고 깔끔한 인터페이스를 제공할 수 있도록 도와줌
-콜백 패턴 : 함수를 인자로 전달
-- 콜백을 사용할 때는 항상 유효범위를 고려해야한다.
-- 콜백은 라이브러리에 들어가는 코드와 같이 범용적이고 재사용할 수 있도록 일반화 시키는데 도움을 준다.
-- 이벤트와 같이 비동기적 동작을 위해 콜백은 유용하게 사용된다.
-설정 객체 : 함수에 많은 수의 매개변수를 전달할 때 통제를 벗어나지 않도록 해줌
-- 좀 더 깨끗한 API를 제공하는 방법으로 라이브러리나 다른 프로그램에서 사용할 코드를 만들 때 유용하다.
-- 장점 : 매개변수와 순서를 기억할 필요 없다. 선택적인 매개변수를 안전하게 생략가능. 읽기 쉽고 유지보수 편함. 매개변수를 추가하거나 제거하기 편함 
-- 단점 : 매개변수 이름을 기억해야함. 프로퍼티 이름들이 압축되지 않음.
-함수 반환 : 함수의 반환값이 또 다시 함수가 될 수 있다.
-- 클로저가 생성되기 때문에 비공개 데이터 저장을 위해 사용할 수 있다. 가령, 매번 호출할 때마다 값을 증가시키는 카운터 기능을 만들 수 있다.
-커링 : 원본 함수와 매개변수 일부를 물려받는 새로운 함수를 생성한다. 
-- 함수 적용 : 함수의 호출은 실제로 인자의 묶음을 함수에 적용하는 것이다. Function.prototype.apply(), Function.prototype.call() 을 기억하자. 
-- 부분 적용 : 자바스크립트의 동적인 특성을 사용해 add(<span class="number">5</span>,<span class="number">4</span>)를 add(<span class="number">5</span>)(<span class="number">4</span>) 처럼 동작하도록 한 것을 부분 적용이라고 한다.
-- 커링(Curring) : 부분 적용을 이해하고 처리할 수 있도록 만들어나가는 과정을 말한다. 
-
-~~~javascript
-<span class="comment">//커링된 add() 예</span>
+</code></pre>
+<h2 id="toc_21">함수 호이스팅</h2>
+<p>함수 선언문은 함수 내에서 호이스팅되지만 함수표현식에서 선언만 호이스팅된다. 즉, 정의는 호이스팅되지 않는다! </p>
+<h2 id="toc_22">함수패턴 : API 패턴</h2>
+<p>함수에 더 좋고 깔끔한 인터페이스를 제공할 수 있도록 도와줌
+콜백 패턴 : 함수를 인자로 전달</p>
+<ul>
+<li>콜백을 사용할 때는 항상 유효범위를 고려해야한다.</li>
+<li>콜백은 라이브러리에 들어가는 코드와 같이 범용적이고 재사용할 수 있도록 일반화 시키는데 도움을 준다.</li>
+<li>이벤트와 같이 비동기적 동작을 위해 콜백은 유용하게 사용된다.
+설정 객체 : 함수에 많은 수의 매개변수를 전달할 때 통제를 벗어나지 않도록 해줌</li>
+<li>좀 더 깨끗한 API를 제공하는 방법으로 라이브러리나 다른 프로그램에서 사용할 코드를 만들 때 유용하다.</li>
+<li>장점 : 매개변수와 순서를 기억할 필요 없다. 선택적인 매개변수를 안전하게 생략가능. 읽기 쉽고 유지보수 편함. 매개변수를 추가하거나 제거하기 편함 </li>
+<li>단점 : 매개변수 이름을 기억해야함. 프로퍼티 이름들이 압축되지 않음.
+함수 반환 : 함수의 반환값이 또 다시 함수가 될 수 있다.</li>
+<li>클로저가 생성되기 때문에 비공개 데이터 저장을 위해 사용할 수 있다. 가령, 매번 호출할 때마다 값을 증가시키는 카운터 기능을 만들 수 있다.
+커링 : 원본 함수와 매개변수 일부를 물려받는 새로운 함수를 생성한다. </li>
+<li>함수 적용 : 함수의 호출은 실제로 인자의 묶음을 함수에 적용하는 것이다. Function.prototype.apply(), Function.prototype.call() 을 기억하자. </li>
+<li>부분 적용 : 자바스크립트의 동적인 특성을 사용해 add(5,4)를 add(5)(4) 처럼 동작하도록 한 것을 부분 적용이라고 한다.</li>
+<li>커링(Curring) : 부분 적용을 이해하고 처리할 수 있도록 만들어나가는 과정을 말한다. </li>
+</ul>
+<pre><code class="javascript"><span class="comment">//커링된 add() 예</span>
 <span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(x, y)</span> {</span>
     <span class="keyword">if</span> (<span class="keyword">typeof</span> y === <span class="string">"undefined"</span>) {
         <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="params">(y)</span> {</span>
@@ -381,12 +378,12 @@ add(<span class="number">3</span>)(<span class="number">4</span>); <span class="
 add2000(<span class="number">10</span>); <span class="comment">//2010</span>
 </code></pre><pre><code class="javascript"><span class="comment">//커링의 범용성 적용</span>
 <span class="function"><span class="keyword">function</span> <span class="title">schonfinkelize</span><span class="params">(fn)</span> {</span>
-    <span class="keyword">var</span> slice = <span class="keyword">Array</span>.prototype.slice,
+    <span class="keyword">var</span> slice = Array.prototype.slice,
     stored_args = slice.call(arguments, <span class="number">1</span>);
-    <span class="keyword">return</span> function() {
+    <span class="keyword">return</span> <span class="keyword">function</span>() {
         <span class="keyword">var</span> new_args = slice.call(arguments),
             args = stored_args.concat(new_args);
-        <span class="keyword">return</span> fn.apply(<span class="keyword">null</span>, args);  
+        <span class="keyword">return</span> fn.apply(<span class="literal">null</span>, args);  
     };
 }
 <span class="comment">//일반함수</span>
@@ -409,33 +406,33 @@ schonfinkelize(add, <span class="number">1</span>, <span class="number">2</span>
 addOne(<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>); <span class="comment">//41</span>
 <span class="keyword">var</span> addSix = schonfinkelize(addOne, <span class="number">2</span>, <span class="number">3</span>);
 addSix(<span class="number">5</span>, <span class="number">5</span>); <span class="comment">//16</span>
-
-<span class="comment">##함수패턴 : 초기화 패턴</span>
-
-웹페이지와 애플리케이션에서 매우 흔히 사용되는 초기화와 설정작업을 전역 네임스페이스를 어지럽히지 않고 임시 변수를 사용해 좀더 깨끗하고 구조화된 방법으로 수행할 수 있도록 도와줌
-즉시 실행 함수 : 정의되자마자 실행된다.
-
-- 장점 : 초기화 코드에 유효범위 샌드박스(sandbox)를 제공한다. 즉, 전역 네임스페이스를 깨끗하게 유지한다.
-- 인자를 전달할 수 있다. 즉시 실행 함수내에서 window를 사용하지 않고도 전역객체에 접근할 때 유용하다.
-- 즉시 실행함수에서 미리 계산하여 클로저에 저장해둔 값을 반환할 수 있다.
-- 객체 프로퍼티를 정의할 때도 사용할 수 있다.
-즉시 객체 초기화 : 익명 객체 내부에서 초기화 작업을 구조화한 다음 즉시 호출할 수 있는 메서드를 제공한다.
-- 즉시 객체 초기화 패턴을 활용하면 즉시 실행 함수와 초기화 작업을 할 수 있다는 장점이 있다. 구조적으로 초기화를 구분할 경우 장점이 있다. 
-- 하지만 압축도구는 구글의 클러저 컴파일러의 고급 모드에서만 압축이 가능하다.
-초기화 시점의 분기 : 최초 코드 실행 시점에 코드를 분기하여, 애플리케이션 생명 주기 동안 계속해서 분기가 발생하지 않도록 막아준다. 
-- 어떤 조건이 프로그램의 생명주기 동안 변경이 되지 않는게 확실한 경우, 조건을 단 한 번만 확인하는 것이 바람직하다. 
-
-<span class="comment">##함수패턴 : 성능 패턴</span>
-
-코드의 실행속도를 높이는데 도움을 준다.
-메모이제이션 패턴 : 함수 프로퍼티를 사용해 계산된 값을 다시 계산되지 않도록 한다. 
-
-- 객체의 인자를 캐시하여 키값으로 삼아 같은 인자가 들어올 때 다시 계산하지 않도록 해서 성능을 높혀준다.
-자기선언 함수 : 자기 자신을 덮어씀으로써 두 번째 호출 이후부터는 작업량을 줄게 해줌 
-- 함수가 어떤 초기화 준비 작업을 단 한 번만 수행할 경우 유용하다.
-- 단점<span class="number">1</span>은 자기 자신을 재정의한 후에는 이전에 원본 함수에 추가했던 프로퍼티들을 모두 찾을 수 없게된다. 
-- 단점<span class="number">2</span>는 함수가 다른 이름으로 사용된다면, 재정의된 부분이 아니라 원본 함수의 본문이 실행되어 의도치 않은 동작을 만들 수 있다.
 </code></pre>
+<h2 id="toc_23">함수패턴 : 초기화 패턴</h2>
+<p>웹페이지와 애플리케이션에서 매우 흔히 사용되는 초기화와 설정작업을 전역 네임스페이스를 어지럽히지 않고 임시 변수를 사용해 좀더 깨끗하고 구조화된 방법으로 수행할 수 있도록 도와줌
+즉시 실행 함수 : 정의되자마자 실행된다.</p>
+<ul>
+<li>장점 : 초기화 코드에 유효범위 샌드박스(sandbox)를 제공한다. 즉, 전역 네임스페이스를 깨끗하게 유지한다.</li>
+<li>인자를 전달할 수 있다. 즉시 실행 함수내에서 window를 사용하지 않고도 전역객체에 접근할 때 유용하다.</li>
+<li>즉시 실행함수에서 미리 계산하여 클로저에 저장해둔 값을 반환할 수 있다.</li>
+<li>객체 프로퍼티를 정의할 때도 사용할 수 있다.
+즉시 객체 초기화 : 익명 객체 내부에서 초기화 작업을 구조화한 다음 즉시 호출할 수 있는 메서드를 제공한다.</li>
+<li>즉시 객체 초기화 패턴을 활용하면 즉시 실행 함수와 초기화 작업을 할 수 있다는 장점이 있다. 구조적으로 초기화를 구분할 경우 장점이 있다. </li>
+<li>하지만 압축도구는 구글의 클러저 컴파일러의 고급 모드에서만 압축이 가능하다.
+초기화 시점의 분기 : 최초 코드 실행 시점에 코드를 분기하여, 애플리케이션 생명 주기 동안 계속해서 분기가 발생하지 않도록 막아준다. </li>
+<li>어떤 조건이 프로그램의 생명주기 동안 변경이 되지 않는게 확실한 경우, 조건을 단 한 번만 확인하는 것이 바람직하다. </li>
+</ul>
+
+<h2 id="toc_24">함수패턴 : 성능 패턴</h2>
+<p>코드의 실행속도를 높이는데 도움을 준다.
+메모이제이션 패턴 : 함수 프로퍼티를 사용해 계산된 값을 다시 계산되지 않도록 한다. </p>
+<ul>
+<li>객체의 인자를 캐시하여 키값으로 삼아 같은 인자가 들어올 때 다시 계산하지 않도록 해서 성능을 높혀준다.
+자기선언 함수 : 자기 자신을 덮어씀으로써 두 번째 호출 이후부터는 작업량을 줄게 해줌 </li>
+<li>함수가 어떤 초기화 준비 작업을 단 한 번만 수행할 경우 유용하다.</li>
+<li>단점1은 자기 자신을 재정의한 후에는 이전에 원본 함수에 추가했던 프로퍼티들을 모두 찾을 수 없게된다. </li>
+<li>단점2는 함수가 다른 이름으로 사용된다면, 재정의된 부분이 아니라 원본 함수의 본문이 실행되어 의도치 않은 동작을 만들 수 있다.</li>
+</ul>
+
                         </div>
                         <hr />
                                             
