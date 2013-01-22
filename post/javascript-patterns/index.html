@@ -1000,62 +1000,63 @@ kid.reads.paper = false;
 console.log(dad.reads.paper);  //true
 위 함수들은 아주 간단하고 널리 사용된다고 한다. 그리고 jQuery의 extend() 메서드는 깊은 복사를 하고 Y.clone() 깊은 복사를 수행하면서 함수도 복사해 자식 객체와 바인딩 해준다고 한다. 이 패턴은 프로토타입을 전혀 사용하지 않은 것도 주목할 만하다. 
 하지만 내 생각에.... 깊은 복사를 하는 과정에서 extendDeep()을 재귀적으로 호출하고 있다. 이 점은 자바스크립트 특성상 이렇게 쓰는 경우 스택오버가 걸릴 가능성이 농후하므로 뭔가 비동기적으로 동작하도록 만들 필요가 있다. 
-게다가 배열이 for-in 루프로 요소를 탐색하는 것은  기초에서 다루었듯이 for 루프를 사용하는 것이 맞다. 
-믹스-인 
-프로퍼티 복사 아이디어를 발전시켜 믹스-인 패턴을 생각할 수 있다. 이것은 하나의 객체를 복사하는게 아니라 여러 객체를 복사해 하나의 객체에 섞어 넣을 수 있다.
-function mix() {
-var arg, prop, child = {};
-for (arg = 0; arg &lt; arguments.length; arg +=  {
-for (prop in arguments[arg]) {
-if (arguments[arg].hasOwnProperty(prop)) { //프로토타입 프로퍼티를 걸러냄
-child[prop] = arguments[arg][prop];
-}
-}
-}
-return child;
+게다가 배열이 for-in 루프로 요소를 탐색하는 것은  기초에서 다루었듯이 for 루프를 사용하는 것이 맞다. </p>
+<h2 id="toc_40">믹스-인</h2>
+<p>프로퍼티 복사 아이디어를 발전시켜 믹스-인 패턴을 생각할 수 있다. 이것은 하나의 객체를 복사하는게 아니라 여러 객체를 복사해 하나의 객체에 섞어 넣을 수 있다.</p><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">mix</span><span class="params">()</span> {</span>
+    var arg, prop, child = <span class="cell">{}</span>;
+    <span class="keyword">for</span> (arg = <span class="number">0</span>; arg &lt; <span class="transposed_variable">arguments.</span><span class="built_in">length</span>; arg +=  <span class="cell">{
+        for (prop in arguments[arg]) {
+            if (arguments[arg].hasOwnProperty(prop)) { //프로토타입 프로퍼티를 걸러냄
+                child[prop] = arguments[arg][prop];
+            }</span>
+        }
+    }
+    <span class="keyword">return</span> child;
 }
 var cake = mix(
-{eggs:  large: true},
-{butter:  salted: true},
-{flour: &quot;cups&quot;},
-{sugar: &quot;sure!&quot;}
+    <span class="cell">{eggs:  large: true}</span>,
+    <span class="cell">{butter:  salted: true}</span>,
+    <span class="cell">{flour: "cups"}</span>,
+    <span class="cell">{sugar: "sure!"}</span>
 );
-console.dir(cake);
-결과적으로 아래처럼 나온다.
-butter: 1
-eggs: 2
-large: true
-salted: true
-flour: &quot;cups&quot;
-sugar: &quot;sure!&quot;</p><p>믹스-인 개념에는 단순히 루프를 돌고, 프로퍼티를 복사하는 것이기 때문에 부모들과의 연결 고리는 끊어진 상태이다. 
+<span class="transposed_variable">console.</span>dir(cake);
+</code></pre><p>결과적으로 아래처럼 나온다.</p><pre><code class="console"><span class="attribute">butter</span>: <span class="string">1</span>
+<span class="attribute">eggs</span>: <span class="string">2</span>
+<span class="attribute">large</span>: <span class="string">true</span>
+<span class="attribute">salted</span>: <span class="string">true</span>
+<span class="attribute">flour</span>: <span class="string">"cups"</span>
+<span class="attribute">sugar</span>: <span class="string">"sure!"</span>
+</code></pre><p>믹스-인 개념에는 단순히 루프를 돌고, 프로퍼티를 복사하는 것이기 때문에 부모들과의 연결 고리는 끊어진 상태이다. 
 개인적인 이 패턴에 대한 생각을 남기면... 위 mix() 메서드는 여러개의 객체중에 프로퍼티 이름이 중복되면 마지막에 들어간 것이 기존에 있는 것을 덮어쓰게 될 것이다. 
-게다가 다음과 같은 경우에는 대응하지 못한다.
-var a = {array: [};
+게다가 다음과 같은 경우에는 대응하지 못한다.</p><pre><code class="javascript">var a = {array: [}<span class="comment">;</span>
 var cake = mix(
-{eggs:  large: true},
-{butter:  salted: true},
-{flour: &quot;cups&quot;},
-{sugar: &quot;sure!&quot;},
-a
-);
-a.array.push(;
-console.log(a.array.toString()); //&quot;
-console.log(cake.array.toString()); //&quot;
-원래 기대하는 바는 cake.array.toString()의 경우 &quot;이어야 할 것이다. 즉, 배열값에 대해서는 얕은 복사를 했으므로 깊은 복사를 할 수 있도록 개선해야한다. 
-메서드 빌려쓰기 
-메서드 빌려쓰기 재사용 패턴은 정말 자바스크립트의 특징을 대변해주는 패턴일 것이다. 이 패턴은 부모-자식 관계까지 만들지 않고 어떤 객체의 메서드 한두개만 빌려쓰는데 유용하다. 
-책 내용중에는 apply와 call을 사용해 bind를 구축하는 방법과 this문제를 잘 다루었다. 마지막에 ECMAScript 터 지원하는 Function.prototype.bind() 메서드를 사용하면 된다고 했다. 하지만 이 메서드가 지원되지 않은 경우도 감안해서 아래와 같은 코드를 쓰면 언제든지 bind()를 활용할 수 있게 된다. 
-if (typeof Function.prototype.bind === &quot;undefined&quot;) {
-Function.prototype.bind = function (thisArg) {
-var fn = this,
-slice = Array.prototype.slice,
-args = slice.call(argments, ;
-return function () {
-return fn.apply(thisArg, args.concat(slice.call(arguments)));
-};
+    {eggs:  large: true},
+    {butter:  salted: true},
+    {flour: <span class="string">"cups"</span>},
+    {sugar: <span class="string">"sure!"</span>},
+    a
+)<span class="comment">;</span>
+a<span class="preprocessor">.array</span><span class="preprocessor">.push</span>()<span class="comment">;</span>
+    console<span class="preprocessor">.log</span>(a<span class="preprocessor">.array</span><span class="preprocessor">.toString</span>())<span class="comment">; //"</span>
+    console<span class="preprocessor">.log</span>(cake<span class="preprocessor">.array</span><span class="preprocessor">.toString</span>())<span class="comment">; //"</span>
+</code></pre><p>원래 기대하는 바는 cake.array.toString()의 경우 &quot;이어야 할 것이다. 즉, 배열값에 대해서는 얕은 복사를 했으므로 깊은 복사를 할 수 있도록 개선해야한다. </p>
+<h2 id="toc_41">메서드 빌려쓰기</h2>
+<p>메서드 빌려쓰기 재사용 패턴은 정말 자바스크립트의 특징을 대변해주는 패턴일 것이다.
+이 패턴은 부모-자식 관계까지 만들지 않고 어떤 객체의 메서드 한두개만 빌려쓰는데 유용하다. 
+책 내용중에는 apply와 call을 사용해 bind를 구축하는 방법과 this문제를 잘 다루었다. 
+마지막에 ECMAScript 터 지원하는 Function.prototype.bind() 메서드를 사용하면 된다고 했다.
+하지만 이 메서드가 지원되지 않은 경우도 감안해서 아래와 같은 코드를 쓰면 언제든지 bind()를 활용할 수 있게 된다. </p><pre><code class="javascript"><span class="title">if</span> (<span class="typedef">typeof <span class="type">Function</span>.prototype.bind === "undefined") <span class="container">{
+    <span class="type">Function</span>.<span class="title">prototype</span>.<span class="title">bind</span> = <span class="title">function</span> (<span class="title">thisArg</span>) {
+        <span class="title">var</span> <span class="title">fn</span> = <span class="title">this</span>,
+        <span class="title">slice</span> = <span class="type">Array</span>.<span class="title">prototype</span>.<span class="title">slice</span>,
+        <span class="title">args</span> = <span class="title">slice</span>.<span class="title">call</span>(<span class="title">argments</span>, ;
+
+        <span class="title">return</span> <span class="title">function</span> () {
+            <span class="title">return</span> <span class="title">fn</span>.<span class="title">apply</span>(<span class="title">thisArg</span>, <span class="title">args</span>.<span class="title">concat</span>(<span class="title">slice</span>.<span class="title">call</span>(<span class="title">arguments</span>)));
+        }</span>;</span>
+    }
 }
-}
-메서드 빌려쓰기 패턴은 잘쓰면 꽤 유용할 듯 싶다.
+</code></pre><p>메서드 빌려쓰기 패턴은 잘쓰면 꽤 유용할 듯 싶다.
 아무튼 이 책의 이번 장을 보면서 느낀 것은 클래스 상속이 재사용의 유일한 방책은 아니며 오히려 상속보다 더 우아한 방법으로 재사용을 할 수 있고 그것을 잘 활용해야한다는 점이다. </p>
                         </div>
                         <hr />
