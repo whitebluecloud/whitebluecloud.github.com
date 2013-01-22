@@ -113,6 +113,8 @@
                     <li class="nav-header">Categories</li>
                     <li class=""><a href="/category"><i class="icon-home"></i> Home</a></li>
                     
+                    <li><a href="/category/javscript"><i class="icon-book"></i> javscript</a></li>
+                    
                     <li><a href="/category/aws"><i class="icon-book"></i> aws</a></li>
                     
                     <li><a href="/category/nodejs"><i class="icon-book"></i> nodejs</a></li>
@@ -124,6 +126,11 @@
 <div class="well">
     <ul class="nav nav-list">
         <li class="nav-header">Recent Articles</li>
+    
+        <li>
+            <a href="/post/javascript-patterns" target="_blank">Javascript Patterns
+            <span class="label">hun</span></a>
+        </li>
     
         <li>
             <a href="/post/start-node-dot-j-s" target="_blank">Start Node.JS
@@ -154,9 +161,9 @@
                                             
 
                         <div class="markdown-wrapper">
-                            <h2 id="toc_13">Start NodeJS</h2>
+                            <h2 id="toc_35">Start NodeJS</h2>
 <p><em class="label "><strong>[NodeJS Beginner Book]</strong></em></p><p><a href="http://www.nodebeginner.org/index-kr.html#javascript-and-nodejs">http://www.nodebeginner.org/index-kr.html#javascript-and-nodejs</a> 를 따라가며 포스팅해보려한다.</p>
-<h1 id="toc_14">서버를 열어보자</h1>
+<h1 id="toc_36">서버를 열어보자</h1>
 <p>server.js란 파일을 생성하여 아래 내용을 넣는다.</p><pre><code class="javascript">var http = <span class="keyword">require</span>(<span class="string">'http'</span>);
 
 http.createServer(function(req, res) {
@@ -171,7 +178,7 @@ hello world가 찍히는 것을 볼 수 있다.</p><p>nodejs를 설치하면 내
 <em class="label "><strong>res.write</strong></em> 으로 body를 채운다음
 <em class="label "><strong>res.end</strong></em> 를 통해 return할 수 있다.
 <em class="label "><strong>listen</strong></em> 은 파라미터로 포트번호를 넣어 해당 포트를 열 수 있다.</p>
-<h1 id="toc_15">Event-driven callbacks</h1>
+<h1 id="toc_37">Event-driven callbacks</h1>
 <p>NodeJS는 비동기방식으로 프로세스가 진행이 된다.
 아는 한도에서 말하면 이벤트단위로 콜백함수를 두어 비동기방식으로 프로세스를 진행하는 방식이다.
 실행흐름이 일정하게 있는 것이 아닌 사용자의 동작에 따라 실행흐름이 바뀌게 되는 것이다.</p><p>위에서 사용한 코드를 콜백함수가 실행되는 것을 확인하도록 리팩토링하면</p><pre><code class="javascript">var http = require(<span class="string">"http"</span>)<span class="comment">;</span>
